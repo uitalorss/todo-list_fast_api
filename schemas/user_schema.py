@@ -2,28 +2,28 @@ from typing import Optional, List
 from pydantic import BaseModel, EmailStr
 from schemas.task_schema import Task
 
-class UserBase(BaseModel):
+class UserBaseSchema(BaseModel):
     email: EmailStr
     name: str
 
-class UserLogin(BaseModel):
+class UserLoginSchema(BaseModel):
     email: EmailStr
     password: str
 
-class User(UserBase):
+class UserSchema(UserBaseSchema):
     int: str
 
     class Config:
         from_attributes=True
 
-class UserCreate(UserBase):
+class UserCreateSchema(UserBaseSchema):
     password: str
 
-class UserUpdate(User):
+class UserUpdateSchema(UserSchema):
     int: Optional[str] = None
     email: Optional[str] = None
     name: Optional[str] = None
     password: Optional[str] = None
 
-class UserListTasks(UserBase):
+class UserListTasksSchema(UserBaseSchema):
     tasks: List[Task]

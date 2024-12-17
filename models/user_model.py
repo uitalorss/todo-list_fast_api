@@ -10,4 +10,3 @@ class UserModel(settings.DBBaseModel):
     name = Column(String(256), nullable=False)
     email = Column(String(256), nullable=False, unique=True, index=True)
     password = Column(String(256), nullable=False)
-    is_active = Column(Boolean, server_default="false")
