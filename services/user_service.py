@@ -3,12 +3,14 @@ from fastapi import HTTPException, status, Response
 from schemas.user_schema import UserSchema, UserBaseSchema, UserCreateSchema, UserUpdateSchema
 from models.user_model import UserModel
 
+from uuid import UUID
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.future import select
 
 async def create_user(user: UserCreateSchema, db: AsyncSession):
-    new_user: UserModel = UserModel(name=user.name, email=user.email, password=user.password, is_active=True)
+    new_user: UserModel = UserModel(name=user.name, email=user.email, password=user.password)
 
     async with db as session:
         try:
@@ -19,7 +21,7 @@ async def create_user(user: UserCreateSchema, db: AsyncSession):
         except IntegrityError:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email já cadastrado.")
         
-async def get_user(user_id: str, db: AsyncSession):
+async def get_user(user_id: UUID, db: AsyncSession):
     async with db as session:
         query = select(UserModel).filter(UserModel.id == user_id)
         result = await session.execute(query)
@@ -30,7 +32,7 @@ async def get_user(user_id: str, db: AsyncSession):
         
         return user
     
-async def update_user(user_id: str, user: UserUpdateSchema, db: AsyncSession):
+async def update_user(user_id: UUID, user: UserUpdateSchema, db: AsyncSession):
     async with db as session:
         query = select(UserModel).filter(UserModel.id == user_id)
         result = await session.execute(query)
@@ -52,7 +54,7 @@ async def update_user(user_id: str, user: UserUpdateSchema, db: AsyncSession):
 
         return user_to_update
     
-async def delete_user(user_id: str, db: AsyncSession):
+async def delete_user(user_id: UUID, db: AsyncSession):
     async with db as session:
         query = select(UserModel).filter(UserModel.id == user_id)
         result = await session.execute(query)

@@ -1,17 +1,19 @@
 from typing import Optional, List
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
+from uuid import UUID
 from schemas.task_schema import Task
 
+
 class UserBaseSchema(BaseModel):
-    email: EmailStr
+    email: str
     name: str
 
 class UserLoginSchema(BaseModel):
-    email: EmailStr
+    email: str
     password: str
 
 class UserSchema(UserBaseSchema):
-    int: str
+    id: UUID
 
     class Config:
         from_attributes=True
@@ -20,7 +22,7 @@ class UserCreateSchema(UserBaseSchema):
     password: str
 
 class UserUpdateSchema(UserSchema):
-    int: Optional[str] = None
+    id: Optional[UUID] = None
     email: Optional[str] = None
     name: Optional[str] = None
     password: Optional[str] = None
