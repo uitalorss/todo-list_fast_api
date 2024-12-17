@@ -1,5 +1,6 @@
 from fastapi import HTTPException, status, Response
 
+from core.auth.security import generate_hashed_password
 from schemas.user_schema import UserSchema, UserBaseSchema, UserCreateSchema, UserUpdateSchema
 from models.user_model import UserModel
 
@@ -10,7 +11,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.future import select
 
 async def create_user(user: UserCreateSchema, db: AsyncSession):
-    new_user: UserModel = UserModel(name=user.name, email=user.email, password=user.password)
+    new_user: UserModel = UserModel(name=user.name, email=user.email, password=generate_hashed_password(user.password))
 
     async with db as session:
         try:
@@ -39,7 +40,7 @@ async def update_user(user_id: UUID, user: UserUpdateSchema, db: AsyncSession):
         user_to_update: UserSchema = result.scalars().unique().one_or_none()
 
         if user_to_update is None:
-            HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuário não encontrado.")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuário não encontrado.")
 
         if user.name:
             user_to_update.name = user.name
@@ -48,7 +49,7 @@ async def update_user(user_id: UUID, user: UserUpdateSchema, db: AsyncSession):
             user_to_update.email = user.email
 
         if user.password:
-            user_to_update.password = user.password
+            user_to_update.password = generate_hashed_password(user.password)
 
         await session.commit()
 
