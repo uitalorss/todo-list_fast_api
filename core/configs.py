@@ -7,8 +7,8 @@ import dotenv
 dotenv.load_dotenv()
 
 class Settings(BaseSettings):
-    API_V1_STR: ClassVar[str] = "api/v1"
-    DB_URL = ClassVar[str] = "sqlite+aiosqlite:///./dev.db"
+    API_V1_STR: ClassVar[str] = "/api/v1"
+    DB_URL: ClassVar[str] = "sqlite+aiosqlite:///./dev.db"
     DBBaseModel: ClassVar[DeclarativeMeta] = declarative_base()
 
     JWT_KEY: str = os.getenv("JWT_KEY")
