@@ -1,16 +1,22 @@
-from typing import Optional
 from pydantic import BaseModel
 from uuid import UUID
+from datetime import datetime
 
-class TaskBase(BaseModel):
-    description: str
-    completed: bool
+from models.task_model import StatusEnum
 
-class Task(TaskBase):
-    int: UUID
-
-class TaskUpdate(BaseModel):
+class TaskBaseSchema(BaseModel):
     description: str
 
-class TaskUpdateStatus(BaseModel):
-    completed: str
+class TaskSchema(TaskBaseSchema):
+    id: int
+    status: StatusEnum
+    created_at: datetime
+
+    class Config:
+        from_attributes=True
+
+class TaskUpdateSchema(BaseModel):
+    description: str
+
+class TaskUpdateStatusSchema(BaseModel):
+    status: StatusEnum

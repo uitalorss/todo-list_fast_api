@@ -1,4 +1,5 @@
 from fastapi import HTTPException, status, Response
+from fastapi.exceptions import ResponseValidationError
 
 from core.auth.security import generate_hashed_password
 from core.auth.security import verify_password

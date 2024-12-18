@@ -1,7 +1,7 @@
 from typing import Optional, List
 from pydantic import BaseModel
 from uuid import UUID
-from schemas.task_schema import Task
+from schemas.task_schema import TaskSchema
 
 
 class UserBaseSchema(BaseModel):
@@ -28,4 +28,4 @@ class UserUpdateSchema(UserSchema):
     password: Optional[str] = None
 
 class UserListTasksSchema(UserBaseSchema):
-    tasks: List[Task]
+    tasks: Optional[List[TaskSchema]]
