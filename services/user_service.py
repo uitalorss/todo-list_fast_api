@@ -1,7 +1,9 @@
 from fastapi import HTTPException, status, Response
 
 from core.auth.security import generate_hashed_password
-from schemas.user_schema import UserSchema, UserBaseSchema, UserCreateSchema, UserUpdateSchema
+from core.auth.security import verify_password
+from core.auth.auth import create_access_token
+from schemas.user_schema import UserSchema, UserBaseSchema, UserCreateSchema, UserUpdateSchema, UserLoginSchema
 from models.user_model import UserModel
 
 from uuid import UUID
@@ -68,3 +70,19 @@ async def delete_user(user_id: UUID, db: AsyncSession):
         await session.commit()
 
         return Response(status_code=status.HTTP_204_NO_CONTENT)
+    
+async def login_user(user_login: UserLoginSchema, db: AsyncSession):
+    async with db as session:
+        query = select(UserModel).filter(UserModel.email == user_login.email)
+        result = await session.execute(query)
+        user = result.scalars().unique().one_or_none()
+
+        if not user:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Usuário e/ou senha incorretos.")
+        
+        if not verify_password(user_login.password, user.password):
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Usuário e/ou senha incorretos.")
+        
+        user_id = str(user.id)
+
+        return create_access_token(sub=user_id)
