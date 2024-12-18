@@ -13,4 +13,4 @@ class TaskUpdate(BaseModel):
     description: str
 
 class TaskUpdateStatus(BaseModel):
-    completed: bool
+    completed: str

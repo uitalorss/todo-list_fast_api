@@ -5,7 +5,7 @@ from uuid import UUID
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from schemas.user_schema import UserCreateSchema, UserSchema, UserUpdateSchema, UserLoginSchema
+from schemas.user_schema import UserCreateSchema, UserSchema, UserUpdateSchema, UserLoginSchema, UserListTasksSchema
 from services.user_service import create_user, delete_user, update_user, get_user, login_user
 from models.user_model import UserModel
 
@@ -23,7 +23,7 @@ async def post_login(user: UserLoginSchema, db: AsyncSession = Depends(get_sessi
     token = await login_user(user_login=user, db=db)
     return JSONResponse(content = {"access_token": token, "token-type": "bearer"}, status_code=status.HTTP_200_OK) 
 
-@router.get("/", response_model=UserSchema, status_code=status.HTTP_200_OK)
+@router.get("/", response_model=UserListTasksSchema, status_code=status.HTTP_200_OK)
 async def get(db: AsyncSession = Depends(get_session), logged_user: UserModel = Depends(get_current_user)):
     return await get_user(user_id=logged_user.id, db=db)
 
