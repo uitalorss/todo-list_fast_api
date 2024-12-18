@@ -2,7 +2,7 @@ from fastapi import status, HTTPException, Response
 
 from models.task_model import TaskModel, StatusEnum
 
-from schemas.task_schema import TaskBaseSchema, TaskSchema, TaskUpdateSchema, TaskUpdateStatusSchema
+from schemas.task_schema import TaskBaseSchema, TaskUpdateSchema, TaskUpdateStatusSchema
 
 from sqlalchemy import and_
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -20,7 +20,6 @@ async def create_task(task: TaskBaseSchema, user_id: UUID,  db: AsyncSession):
         try:
             session.add(new_task)
             await session.commit()
-            print(type(new_task.id))
             return new_task
         except IntegrityError:
             raise HTTPException("Erro ao criar tarefa")
@@ -52,7 +51,6 @@ async def update_task(task_id: int, task: TaskUpdateSchema, db: AsyncSession, us
         return update_task_data
 
 async def update_status_task(task_id: int, task: TaskUpdateStatusSchema, db: AsyncSession, user: UserModel):
-    print
     async with db as session:
         query = select(TaskModel).filter(and_(TaskModel.id == task_id, TaskModel.user_id == user.id))
         result = await session.execute(query)
