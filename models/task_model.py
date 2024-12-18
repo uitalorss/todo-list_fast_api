@@ -1,7 +1,9 @@
 from enum import Enum
 
-from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy import Enum as SQLAlchemyEnum
+from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import UUID
 from core.configs import settings
 
 from datetime import datetime
@@ -20,3 +22,5 @@ class TaskModel(settings.DBBaseModel):
     description = Column(String, nullable=False)
     status = Column(SQLAlchemyEnum(), nullable=False, default=StatusEnum.NAO_INICIADO)
     created_at = Column(DateTime, default=datetime.now(timezone("America/Bahia")))
+    user_id = Column(UUID, ForeignKey("Usuarios.id"))
+    user = relationship("UserModel", back_populates="tasks", lazy="joined")
