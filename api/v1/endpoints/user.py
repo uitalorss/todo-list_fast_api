@@ -1,8 +1,6 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.responses import JSONResponse
 
-from uuid import UUID
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from schemas.user_schema import UserCreateSchema, UserSchema, UserUpdateSchema, UserLoginSchema, UserListTasksSchema

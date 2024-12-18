@@ -3,13 +3,10 @@ from fastapi import APIRouter, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from schemas.task_schema import TaskBaseSchema, TaskSchema, TaskUpdateSchema, TaskUpdateStatusSchema
-from models.task_model import TaskModel
 from models.user_model import UserModel
 from services.task_service import create_task, get_task, update_task, update_status_task, delete_task
 
 from core.auth.deps import get_session, get_current_user
-
-from uuid import UUID
 
 router = APIRouter()
 
