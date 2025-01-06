@@ -7,10 +7,6 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/uitalorss/todo-list_fast_api?style=for-the-badge)
 ![GitHub Contributors](https://img.shields.io/github/contributors/uitalorss/todo-list_fast_api?style=for-the-badge&color=blue)
 
-<img src="exemplo-image.png" alt="exemplo imagem">
-
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
-
 ### 💡 Um pouco sobre o projeto.
 
 A API de Lista de Tarefas é um projeto desenvolvido com o intuito de consolidar conhecimento no desenvolvimento back-end utilizando Python e o framework FastAPI através de uma API gerenciar tarefas pessoais ou corporativas. Ela permite que usuários criem, organizem e acompanhem suas tarefas de forma eficiente, utilizando uma arquitetura RESTful e boas práticas de desenvolvimento.
