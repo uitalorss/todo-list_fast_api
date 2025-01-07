@@ -28,6 +28,7 @@ A API de Lista de Tarefas é um projeto desenvolvido com o intuito de consolidar
 ## ☕ Usando o projeto
 - Acesse a pasta do projeto.
 - Digite o comando `fastapi dev main.py`.
+- Para acessar a documentação dos endpoints da APi digite o comando `http://localhost:8000/docs` ou `http://localhost:8000/redoc`.
 
 ## ✅ Requisitos funcionais
 
