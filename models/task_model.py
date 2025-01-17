@@ -20,6 +20,7 @@ class TaskModel(settings.DBBaseModel):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     description = Column(String, nullable=False)
+    tag = Column(String)
     status = Column(SQLAlchemyEnum(StatusEnum), nullable=False, default=StatusEnum.NAO_INICIADO.value)
     created_at = Column(DateTime, default=datetime.now(timezone("America/Bahia")))
     user_id = Column(UUID, ForeignKey("Usuarios.id"))
