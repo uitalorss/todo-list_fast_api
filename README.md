@@ -17,6 +17,7 @@ A API de Lista de Tarefas é um projeto desenvolvido com o intuito de consolidar
     - Python
     - FastAPI
     - SQLAlchemy
+    - Alembic
     - JWT
 
 ## 🚀 Instalando o projeto
