@@ -34,14 +34,14 @@ A API de Lista de Tarefas é um projeto desenvolvido com o intuito de consolidar
 ## ✅ Requisitos funcionais
 
 ### Gestão de Usuários:
-1. **Criar usuário**: O sistema deve permitir a criação de um novo usuário.
-2. **Autenticação**: O sistema deve permitir que o usuário se autentique na aplicação.
+-[x] **Criar usuário**: O sistema deve permitir a criação de um novo usuário.
+-[x] **Autenticação**: O sistema deve permitir que o usuário se autentique na aplicação.
 
 ### Gestão de Tarefas:
-3. **Criar tarefa**: O usuário deve poder criar novas tarefas.
-4. **Listar tarefas por usuário**: O sistema deve permitir listar todas as tarefas de um usuário específico.
-5. **Editar tarefa**: O usuário deve poder editar uma tarefa existente.
-6. **Excluir tarefa**: O usuário deve poder excluir uma tarefa existente.
+-[x] **Criar tarefa**: O usuário deve poder criar novas tarefas.
+-[x] **Listar tarefas por usuário**: O sistema deve permitir listar todas as tarefas de um usuário específico.
+-[x] **Editar tarefa**: O usuário deve poder editar uma tarefa existente.
+-[x] **Excluir tarefa**: O usuário deve poder excluir uma tarefa existente.
 
 ## 📫 Contribuindo para o projeto
 
